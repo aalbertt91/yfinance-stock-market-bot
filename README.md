@@ -1,40 +1,60 @@
-# Stock Market Data ETL Pipeline (YFinance → SQLite)
+# Financial Market Data Extractor (yFinance Bot)
+This repository contains a Python-based automation tool designed to fetch real-time financial market data using the Yahoo Finance API. It automates the extraction of historical prices, tickers, and key financial metrics for further analysis or reporting.
 
-## Project Objective
+# 📌 Problem & Solution
+Manually tracking market data for multiple tickers is inefficient and limits the ability to perform high-frequency or large-scale analysis. Relying on manual downloads leads to outdated information and slowed decision-making.
 
-This project automates the extraction, transformation, and loading (ETL) of historical stock market data using the yfinance API and stores the processed data in a SQLite database. In addition, it generates basic financial summaries for selected stocks, such as daily price changes, average closing prices, and volatility metrics. The project aims to create a clean, reusable data pipeline suitable for basic financial analysis and reporting.
+This automation bot:
 
-## Technologies Used
+Eliminates manual data fetching by automating the API connection to Yahoo Finance.
 
-**Python:** Core programming language used for data processing and automation.
+Streamlines ticker monitoring by processing multiple financial instruments simultaneously.
 
-**Pandas:** For data cleaning, manipulation, and numerical analysis.
+Formats raw market data into clean, analysis-ready structures (DataFrames/CSV).
 
-**Yfinance:** For retrieving historical stock market data from Yahoo Finance.
+Provides reliable execution tracking through integrated logging.
 
-**SQLAlchemy:** For ORM-based database interaction.
+# 🛠 Tech Stack
+**Python:** Core programming for API orchestration and automation.
 
-**SQLite:** Lightweight relational database used for storing stock price records.
+**yFinance:** Primary library for financial data extraction.
 
-**Logging:** To track execution flow and capture potential runtime issues.
+**Pandas:** Data structuring and export management.
 
-**Datetime:** For handling date ranges and time-based operations.
+**Logging:** To monitor API requests and handle connection status.
 
-## How to Run
+# ⚙️ Core Automation Workflow
+**Request:** Initializes an automated connection to the yFinance API for a specified list of tickers.
 
-1. Ensure the required Python libraries are installed:
+**Extraction:** Fetches historical price data, volume, and company metadata.
 
+**Data Processing:** Cleans and structures the raw API response using Pandas.
+
+**Storage/Export:** Saves the structured financial data as CSV or prepares it for downstream analytics.
+
+# 📊 Example Output
+When the script is executed, it provides a summary of the extracted market data and database status:
+
+```
+INFO:root:Stock data successfully written to the database.
+INFO:root:Total rows inserted: 33
+INFO:root:Amazon Summary: {'Last Close': 232.52, 'Daily Change': 0.45, 'Mean Close': 228.23, ...}
+INFO:root:Apple Summary: {'Last Close': 272.82, 'Daily Change': -0.67, 'Mean Close': 272.81, ...}
+INFO:root:Tesla Summary: {'Last Close': 454.42, 'Daily Change': -5.21, 'Mean Close': 476.90, ...}
+```
+
+# 🚀 How to Run
+1. Ensure you have the ticker list ready in the configuration.
+
+2. Install dependencies:
+
+```
 pip install -r requirements.txt
+```
 
-2. Run the script:
+3. Run the automation:
 
-python src/stock-market-data-bot.py
+```
+python "yfinance bot/src/stock-market-data-bot.py"
+```
 
-3. After execution, check the financial_data.db SQLite database to verify that stock market data has been successfully inserted.
-
-## Why This Is Valuable for a Hedge Fund
-
-- Retrieves historical stock market data automatically from Yahoo Finance.
-- Stores data in a structured SQLite database for reliable analysis and reporting.
-- Generates automated financial summaries including daily changes and volatility metrics.
-- Reduces manual data collection effort and ensures high data integrity for financial modeling.
